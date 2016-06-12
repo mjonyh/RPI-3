@@ -1,5 +1,7 @@
 import cv2
 import time
+#import httplib2
+import urllib3
 
 def diffImg(t0, t1, t2):
     d1 = cv2.absdiff(t2, t1)
@@ -23,14 +25,24 @@ t_plus = cv2.cvtColor(cam.read()[1], cv2.COLOR_RGB2GRAY)
 newImg = diffImg(t_minus, t, t_plus)
 tag_min = cv2.mean(newImg)
 
-print("Environment has minimum value: "+tag_min[0])
+print("Environment has minimum value: ",tag_min[0])
+
+tag_object = 0
 
 while True:
     newImg = diffImg(t_minus, t, t_plus)
     tag = cv2.mean(newImg)
 
     # conditions for saving data
-    if( tag[0] > tag_min[0]+0.2 ):
+    if( tag[0] > tag_min[0]+0.3 ):
+
+        if (  tag_object == 0 ):
+            print ("something around")
+            http = urllib3.PoolManager()
+            url="10.161.217.142/test.php?event=true"
+            f = http.request('GET', url)
+            #print f.read()
+
         # read camera
         ret, frame = cam.read()
 
@@ -42,7 +54,10 @@ while True:
         # save images
         out.write(frame)
 
+        tag_object = 1
+
     else:
+        tag_object = 0
         cv2.destroyWindow("real")
 
     cv2.imshow( winName, newImg)
