@@ -7,7 +7,8 @@ def diffImg(t0, t1, t2):
     return cv2.bitwise_and(d1, d2)
 
 cam = cv2.VideoCapture(0)
-#out = cv2.VideoWriter(time.asctime( time.localtime(time.time())  )+".avi",fourcc, 20.0, (640,480))
+
+# encode lib
 fourcc = cv2.VideoWriter_fourcc('X','V','I','D')
 out = cv2.VideoWriter("output.avi",fourcc, 20.0, (640,480))
 
@@ -22,28 +23,23 @@ t_plus = cv2.cvtColor(cam.read()[1], cv2.COLOR_RGB2GRAY)
 newImg = diffImg(t_minus, t, t_plus)
 tag_min = cv2.mean(newImg)
 
-print(tag_min[0])
+print("Environment has minimum value: "+tag_min[0])
 
 while True:
     newImg = diffImg(t_minus, t, t_plus)
-
     tag = cv2.mean(newImg)
 
-    #if tag[0] < tag_min:
-    #    tag_min = tag[0]
-    #    print tag_min
-
-    #print (tag[0])
-
+    # conditions for saving data
     if( tag[0] > tag_min[0]+0.2 ):
-    #if(tag[0] > 2.0):
+        # read camera
         ret, frame = cam.read()
 
+        # write date time on image
         font = cv2.FONT_HERSHEY_SIMPLEX
         cv2.putText(frame,time.asctime( time.localtime(time.time()) ),(50,50), font, 1,(255,255,255),1,cv2.LINE_AA)
         #cv2.imshow("real", frame)
 
-
+        # save images
         out.write(frame)
 
     else:
