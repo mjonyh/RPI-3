@@ -39,7 +39,7 @@ while True:
         if (  tag_object == 0 ):
             print ("something around")
             http = urllib3.PoolManager()
-            url="10.161.217.142/test.php?event=true"
+            url="IP_ADDRESS/test.php?event=true"
             f = http.request('GET', url)
             #print f.read()
 
