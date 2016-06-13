@@ -13,7 +13,7 @@ cam = cv2.VideoCapture(0)
 # encode lib
 #fourcc = cv2.VideoWriter_fourcc('X','V','I','D')    # for raspberry pi
 fourcc = cv2.cv.CV_FOURCC('X','V','I','D')          # for laptop
-out = cv2.VideoWriter("output.avi",fourcc, 20.0, (640,480))
+#out = cv2.VideoWriter("output.avi",fourcc, 20.0, (640,480))
 
 winName = "Movement Indicator"
 #cv2.namedWindow(winName, cv2.CV_WINDOW_AUTOSIZE)
@@ -39,7 +39,7 @@ while True:
 
         if (  tag_object == 0 ):
             print ("something around because Environment has ", tag[0])
-            #out = cv2.VideoWriter(time.asctime(time.localtime(time.time())),fourcc, 20.0, (640,480))
+            out = cv2.VideoWriter('output/'+time.asctime(time.localtime(time.time()))+".avi",fourcc, 20.0, (640,480))
             #http = urllib3.PoolManager()
             #url="IP_ADDRESS/test.php?event=true"
             #f = http.request('GET', url)
