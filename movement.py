@@ -11,7 +11,8 @@ def diffImg(t0, t1, t2):
 cam = cv2.VideoCapture(0)
 
 # encode lib
-fourcc = cv2.VideoWriter_fourcc('X','V','I','D')
+#fourcc = cv2.VideoWriter_fourcc('X','V','I','D')    # for raspberry pi
+fourcc = cv2.cv.CV_FOURCC('X','V','I','D')          # for laptop
 out = cv2.VideoWriter("output.avi",fourcc, 20.0, (640,480))
 
 winName = "Movement Indicator"
@@ -38,9 +39,9 @@ while True:
 
         if (  tag_object == 0 ):
             print ("something around")
-            http = urllib3.PoolManager()
-            url="IP_ADDRESS/test.php?event=true"
-            f = http.request('GET', url)
+            #http = urllib3.PoolManager()
+            #url="IP_ADDRESS/test.php?event=true"
+            #f = http.request('GET', url)
             #print f.read()
 
         # read camera
@@ -48,7 +49,8 @@ while True:
 
         # write date time on image
         font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(frame,time.asctime( time.localtime(time.time()) ),(50,50), font, 1,(255,255,255),1,cv2.LINE_AA)
+        #cv2.putText(frame,time.asctime( time.localtime(time.time()) ),(50,50), font, 1,(255,255,255),1,cv2.LINE_AA)   # for raspberry pi
+        cv2.putText(frame,time.asctime( time.localtime(time.time()) ),(50,50), font, 1,(255,255,255),1,cv2.CV_AA)   # for laptop
         #cv2.imshow("real", frame)
 
         # save images
