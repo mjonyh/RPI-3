@@ -1,7 +1,7 @@
 import cv2
 import time
-#import httplib2
-import urllib3
+
+#import urllib3
 
 def diffImg(t0, t1, t2):
     d1 = cv2.absdiff(t2, t1)
@@ -38,7 +38,8 @@ while True:
     if( tag[0] > tag_min[0]+0.3 ):
 
         if (  tag_object == 0 ):
-            print ("something around")
+            print ("something around because Environment has ", tag[0])
+            #out = cv2.VideoWriter(time.asctime(time.localtime(time.time())),fourcc, 20.0, (640,480))
             #http = urllib3.PoolManager()
             #url="IP_ADDRESS/test.php?event=true"
             #f = http.request('GET', url)
