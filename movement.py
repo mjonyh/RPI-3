@@ -21,7 +21,7 @@ fourcc = cv2.VideoWriter_fourcc('X', 'V', 'I', 'D')
 # for laptop
 # fourcc = cv2.cv.CV_FOURCC('X', 'V', 'I', 'D')
 
-out = cv2.VideoWriter("output.avi", fourcc, 20.0, (640, 480))
+# out = cv2.VideoWriter("output.avi", fourcc, 20.0, (640, 480))
 
 winName = "Movement Indicator"
 # cv2.namedWindow(winName, cv2.CV_WINDOW_AUTOSIZE)
